@@ -14,7 +14,7 @@ public class User {
     private String username;
     private String email;
     private String password;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name= "user_id", nullable=false)
-    private User user;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name= "user_id", nullable=false)
+//    private User user;
 }
