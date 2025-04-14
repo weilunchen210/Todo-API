@@ -27,4 +27,16 @@ public class TodoController {
         return ResponseEntity.ok(todo);
     }
 
+    @DeleteMapping("/{Id}")
+    public ResponseEntity<String> deleteTodo(@PathVariable Long Id){
+        this.todoService.deleteTodo(Id);
+        return ResponseEntity.ok("Delete Success");
+    }
+
+    @PutMapping("/{Id}")
+    public ResponseEntity<String> editTodo(@RequestBody saveTodo input, @PathVariable Long Id){
+        this.todoService.editTodo(input, Id);
+        return ResponseEntity.ok("Update Success");
+    }
+
 }
