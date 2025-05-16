@@ -3,6 +3,7 @@ package com.todolist.todolist.controller;
 import com.todolist.todolist.Dto.saveTodo;
 import com.todolist.todolist.entity.Todo;
 import com.todolist.todolist.service.TodoService;
+import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,6 +38,12 @@ public class TodoController {
     public ResponseEntity<String> editTodo(@RequestBody saveTodo input, @PathVariable Long Id){
         this.todoService.editTodo(input, Id);
         return ResponseEntity.ok("Update Success");
+    }
+
+    @PutMapping("/")
+    public ResponseEntity<String> completeTodo(@RequestBody Long id){
+        this.todoService.completeTask(id);
+        return ResponseEntity.ok("Completed Task");
     }
 
 }

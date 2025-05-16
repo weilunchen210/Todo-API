@@ -1,9 +1,6 @@
 package com.todolist.todolist.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,4 +18,10 @@ public class Todo {
     private String title;
     private String description;
     private LocalDateTime createdDate;
+    private status status;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name= "user_id", nullable=false)
+    private User user;
 }
+

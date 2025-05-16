@@ -7,14 +7,12 @@ import lombok.Setter;
 @Entity
 @Setter
 @Getter
+@Table(name= "users")
 public class User {
-
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String username;
     private String email;
     private String password;
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name= "user_id", nullable=false)
-//    private User user;
 }
