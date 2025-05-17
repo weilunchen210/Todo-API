@@ -1,0 +1,19 @@
+
+.MainContainer{
+    width:50vw;
+    height:45vh;
+    background-color:#B0DB9C;
+    border-radius:20px;
+    padding: 1rem;
+}
+
+.container-wrapper{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+
+.MainContainer h1 {
+
+}
