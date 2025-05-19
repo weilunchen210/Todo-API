@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import "./LoginForm.css"
+import { Link } from 'react-router'
 
 
 function  LoginForm() {
@@ -23,16 +24,16 @@ function  LoginForm() {
                 <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password"></input>
             </div>
             <div className="submit">
-                <input className="form-button" type="submit" value="Login"></input>
+                <input className="button login-button" type="submit" value="Login"></input>
             </div>
             <div className="submit">
-                <button className="form-button">
+                <button className="button dummy-login-button">
                     Dummy Login
                 </button>
             </div>
             <div className="register">
                 <p>
-                    Don't have an account? <a href="#">Register</a>
+                    Don't have an account? <Link to="/register">Register</Link>
                 </p>
             </div>
         </form>

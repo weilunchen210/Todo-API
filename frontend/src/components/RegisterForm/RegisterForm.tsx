@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import "./LoginForm.css"
+import "./RegisterForm.css"
 
 
 function  RegisterForm() {
@@ -9,16 +9,16 @@ function  RegisterForm() {
     const [email, setEmail] = useState("")
 
     return (
-        <div className="login-container-wrapper">
-        <div className="login-box">
-            <div className="login-title">
+        <div className="register-container-wrapper">
+        <div className="register-box">
+            <div className="register-title">
                 <label className ="title">
-                    Login
+                    Register
                 </label>
             </div>
             <form>
             <div className="input">
-                    <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email"></input>
+                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email"></input>
                 </div>
                 <div className="input">
                     <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Username"></input>

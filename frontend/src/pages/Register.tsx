@@ -1,11 +1,11 @@
-import LoginForm from "../components/LoginForm/LoginForm"
+import RegisterForm from "../components/RegisterForm/RegisterForm"
 
 
 function Register() {
   
     return (
       <div>
-        <LoginForm />
+        <RegisterForm />
       </div>
     )
   }

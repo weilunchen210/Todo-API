@@ -48,16 +48,23 @@
     padding-top:1rem;
 }
 
-.form-button{
+.login-button{
+    background-color:#D0E8CB;
+}
+
+.dummy-login-button{
+    background-color:#FAA0A0;
+}
+
+.button:hover{
+    background-color:darkgrey;
+}
+
+.button{
     width:100%;
     height:2rem;
     border:none;
     cursor:pointer;
-    background-color:#D0E8CB;
-}
-
-.form-button:hover{
-    background-color:darkgrey;
 }
 
 .register{
