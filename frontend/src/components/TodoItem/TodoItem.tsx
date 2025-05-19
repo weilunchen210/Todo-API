@@ -15,10 +15,16 @@ function TodoItem({text}:itemProps) {
 
   return (
     <div className= "todo-container">
-      <input type="checkbox" checked={checked} onChange={handleChange}></input>
-      <p className ={checked ? "done" : ""}>
-        {text}
-      </p>
+      <div className= "content">
+        <input type="checkbox" checked={checked} onChange={handleChange}></input>
+        <p className ={checked ? "done" : ""}>
+          {text}
+        </p>
+      </div>
+      <div className="buttons">
+        <img src="https://icons.veryicon.com/png/o/miscellaneous/linear-small-icon/edit-246.png"></img>
+        <img src="https://cdn-icons-png.flaticon.com/512/6861/6861362.png"></img>
+      </div>
     </div>
   )
 }

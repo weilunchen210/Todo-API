@@ -7,6 +7,8 @@
     border-radius:15px;
     display:flex;
     flex-direction:row;
+    align-items:center;
+    justify-content:space-between;
 }
 
 .todo-container p{
@@ -15,4 +17,21 @@
 
 .todo-container .done {
     text-decoration:line-through;
+}
+
+.todo-container .buttons{
+    display:flex;
+    flex-direction:row;
+    gap:0.8rem;
+}
+
+.todo-container .content{
+    display:flex;
+    flex-direction:row;
+}
+
+.todo-container img{
+    width:1.5rem;
+    height:1.5rem;
+    cursor:pointer;
 }
