@@ -1,9 +1,18 @@
 import { useEffect, useState } from 'react'
 import './MainContainer.css'
 import TodoList from '../TodoList/TodoList'
+import { getTodoList } from '../../services/todoService';
 
 
 interface todo{
+  id:number;
+  title:string;
+  description:string;
+  createdData:Date;
+  status:string;
+}
+
+interface dummyTodo{
   id:number;
   description:string;
 }
@@ -11,7 +20,7 @@ interface todo{
 function MainContainer() {
 
   const [todoList,settodoList] = useState<todo[]>([])
-  const dummyList:todo[] = [
+  const dummyList:dummyTodo[] = [
     { id: 1, description: "Complete React project setup" },
     { id: 2, description: "Implement user authentication" },
     { id: 3, description: "Create responsive UI components" },
@@ -21,7 +30,17 @@ function MainContainer() {
 
   useEffect(() => {
     //Dummy for now, will be used to fetch API later
-    settodoList(dummyList)
+    async function fetchTodoList(){
+      try{
+        const data = await getTodoList();
+        settodoList(data);
+        console.log(data)
+      }catch(error){
+      console.error(error)
+    }
+    }
+
+    fetchTodoList();
   }, [])
 
   const handleDelete = () => {
