@@ -15,6 +15,23 @@
     padding-left:1rem;
 }
 
+.todo-container input{
+    margin-left:1rem;
+}
+
+.todo-container input[type="text"]{
+    font-size:1rem;
+    font-family: 'Lato', sans-serif;
+    width:90%;
+}
+
+.todo.container input[type="text"]:active{
+    outline: none;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+}
+
+
 .todo-container .done {
     text-decoration:line-through;
 }
@@ -28,6 +45,7 @@
 .todo-container .content{
     display:flex;
     flex-direction:row;
+    flex:1;
 }
 
 .todo-container img{

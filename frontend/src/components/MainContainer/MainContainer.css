@@ -14,3 +14,22 @@
     min-height:100%;
 }
 
+.header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.header button{
+    border:none;
+    width:100px;
+    height:2rem;
+    border-radius:10px;
+    background-color:#C3B1E1;
+    cursor:pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header button:hover{
+    background-color:#9A85B9;
+}
