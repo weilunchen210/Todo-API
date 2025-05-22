@@ -10,6 +10,11 @@ function  LoginForm() {
     const [email,setEmail] = useState("")
     const [password,setPassword] = useState("")
 
+    const dummyCredentials = {
+        email:"welper@gmail.com",
+        password:"12345"
+    }
+
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const userDetails = {
@@ -18,6 +23,16 @@ function  LoginForm() {
         }
         try {
             await loginUser(userDetails);
+            navigate('/main'); // Use navigate function here
+        } catch (error) {
+            console.error('Login failed:', error);
+        }
+    }
+
+    const handleDummyLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        try {
+            await loginUser(dummyCredentials);
             navigate('/main'); // Use navigate function here
         } catch (error) {
             console.error('Login failed:', error);
@@ -43,7 +58,7 @@ function  LoginForm() {
                 <input className="button login-button" type="submit" value="Login"></input>
             </div>
             <div className="submit">
-                <button className="button dummy-login-button">
+                <button className="button dummy-login-button" onClick={handleDummyLogin}>
                     Dummy Login
                 </button>
             </div>
