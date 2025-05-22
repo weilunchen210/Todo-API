@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import './MainContainer.css'
 import TodoList from '../TodoList/TodoList'
 import { getTodoList } from '../../services/todoService';
+import Modal from '../AddTaskModal/Modal';
 
 interface todo{
   id:number;
@@ -19,6 +20,11 @@ interface dummyTodo{
 function MainContainer() {
 
   const [todoList,settodoList] = useState<todo[]>([])
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [newTask, setNewTask] = useState({
+    title: '',
+    description: ''
+  })
   const dummyList:dummyTodo[] = [
     { id: 1, description: "Complete React project setup" },
     { id: 2, description: "Implement user authentication" },
@@ -46,6 +52,14 @@ function MainContainer() {
     alert("Deleted")
   }
 
+  const handleAddTask = (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsModalOpen(false)
+    setNewTask({ title: '', description: '' })
+  }
+
+  
+
 
   return (
     <div className="container-wrapper">
@@ -54,12 +68,28 @@ function MainContainer() {
           <h1>
             To do List
           </h1>
-          <button>
+          <button onClick ={() => setIsModalOpen(true)}>
             Add Task
           </button>
         </div>
         <TodoList todoList={todoList} onDelete={handleDelete}/>
       </div>
+
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <form onSubmit={handleAddTask}>
+          <h2>Add New Task</h2>
+          <div className="form-group">
+            <input
+              type="text"
+              placeholder="Task title"
+              value={newTask.title}
+              onChange={(e) => setNewTask({...newTask, title: e.target.value})}
+              required
+            />
+          </div>
+          <button type="submit">Add Task</button>
+        </form>
+      </Modal>
     </div>
   )
 }

@@ -49,26 +49,9 @@ export const loginUser = async (userLoginDetails: userLoginDetails) => {
             Cookies.set('token', response.data.token);
         }
         localStorage.setItem('username',response.data.username)
-
+        localStorage.setItem('ProfilePictureURL',response.data.ProfilePictureURL)
         console.log(response.data);
         return response.data
-    }catch (error) {
-    console.error('Error logging in: ', error);
-    throw error;
-  }
-}
-
-export const getUserDetails = async()=> {
-    try{
-        const jwt = Cookies.get('token')
-        if (!jwt) {
-        throw new Error('No authentication token found');
-        }
-        const response = await apiClient.get<userDetails>('/todo/user', {
-        headers:{
-            Authorization: `Bearer ${jwt}`
-        }
-    });
     }catch (error) {
     console.error('Error logging in: ', error);
     throw error;
