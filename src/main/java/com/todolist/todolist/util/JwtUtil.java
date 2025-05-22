@@ -54,8 +54,8 @@ public class JwtUtil {
         return extractExpiry(token).before(new Date());
     }
 
-    public Boolean validateToken(String token, String email){
-        final String extractedEmail = extractEmail(token);
-        return (extractedEmail.equals(email) && !checkTokenExpiry(token));
+    public Boolean validateToken(String token, Long userId){
+        final Long extractedUserId = extractUserId(token);
+        return (extractedUserId.equals(userId) && !checkTokenExpiry(token));
     }
 }

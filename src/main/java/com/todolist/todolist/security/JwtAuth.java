@@ -33,18 +33,20 @@ public class JwtAuth extends OncePerRequestFilter {
         if(authorizationHeader != null && authorizationHeader.startsWith("Bearer ")){
             try{
                 String jwt = authorizationHeader.substring(7);
-                String email = jwtUtil.extractEmail(jwt);
+                Long userId = jwtUtil.extractUserId(jwt);
 
-                User userDetails = userService.getUserByEmail(email);
+                User userDetails = userService.getUserById(userId);
 
-                UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
-                        userDetails,
-                        null,
-                        Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"))
-                );
+                if(jwtUtil.validateToken(jwt, userDetails.getId())){
+                    UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
+                            userDetails,
+                            null,
+                            Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"))
+                    );
 
-                auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                SecurityContextHolder.getContext().setAuthentication(auth);
+                    auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                    SecurityContextHolder.getContext().setAuthentication(auth);
+                }
             }catch (Exception e){
                 logger.error("JWT token validation error: ", e);
             }

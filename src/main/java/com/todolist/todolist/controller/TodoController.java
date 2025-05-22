@@ -3,6 +3,7 @@ package com.todolist.todolist.controller;
 import com.todolist.todolist.Dto.saveTodo;
 import com.todolist.todolist.entity.Todo;
 import com.todolist.todolist.service.TodoService;
+import com.todolist.todolist.util.JwtUtil;
 import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,9 +14,11 @@ import java.util.List;
 @RequestMapping("/todo")
 public class TodoController {
     private final TodoService todoService;
+    private final JwtUtil jwtUtil;
 
-    TodoController(TodoService todoService){
+    TodoController(TodoService todoService, JwtUtil jwtUtil){
         this.todoService = todoService;
+        this.jwtUtil = jwtUtil;
     }
 
     @GetMapping("/{Id}")
@@ -24,8 +27,9 @@ public class TodoController {
         return ResponseEntity.ok(todo);
     }
 
-    @GetMapping("/user/{userId}")
-    public ResponseEntity<List<Todo>> getTodoList(@PathVariable Long userId){
+    @GetMapping("/user/")
+    public ResponseEntity<List<Todo>> getTodoList(@RequestHeader("Authorization") String authHeader){
+        Long userId = jwtUtil.extractUserId(authHeader);
         List<Todo> todo = this.todoService.getTodoList(userId);
         return ResponseEntity.ok(todo);
     }
