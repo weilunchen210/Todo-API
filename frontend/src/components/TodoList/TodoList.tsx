@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+
 import TodoItem from '../TodoItem/TodoItem'
 
 interface todo{

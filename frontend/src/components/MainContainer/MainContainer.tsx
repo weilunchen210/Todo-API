@@ -12,11 +12,6 @@ interface todo{
   status:string;
 }
 
-interface dummyTodo{
-  id:number;
-  description:string;
-}
-
 function MainContainer() {
 
   const [todoList,settodoList] = useState<todo[]>([])
@@ -25,13 +20,13 @@ function MainContainer() {
     title: '',
     description: ''
   })
-  const dummyList:dummyTodo[] = [
-    { id: 1, description: "Complete React project setup" },
-    { id: 2, description: "Implement user authentication" },
-    { id: 3, description: "Create responsive UI components" },
-    { id: 4, description: "Add todo item deletion functionality" },
-    { id: 5, description: "Connect to backend API" }
-  ]
+  // const dummyList:dummyTodo[] = [
+  //   { id: 1, description: "Complete React project setup" },
+  //   { id: 2, description: "Implement user authentication" },
+  //   { id: 3, description: "Create responsive UI components" },
+  //   { id: 4, description: "Add todo item deletion functionality" },
+  //   { id: 5, description: "Connect to backend API" }
+  // ]
 
   useEffect(() => {
     //Dummy for now, will be used to fetch API later

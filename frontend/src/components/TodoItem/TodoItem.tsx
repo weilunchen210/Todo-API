@@ -7,7 +7,6 @@ interface itemProps{
 }
 
 function TodoItem({text,onDelete}:itemProps) {
-  const [todoList, settodoList] = useState([])
   const [checked, setChecked] = useState(false)
 
   const handleChange = () =>{

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import "./RegisterForm.css"
 import { registerUser } from '../../services/userService'
 import { useNavigate } from 'react-router'

@@ -12,18 +12,6 @@ interface userLoginDetails{
     password:string
 }
 
-interface userDetails{
-    email:string;
-    username:string;
-}
-
-interface LoginResponse {
-    token: string;
-    userId: number;
-    username: string;
-    email: string;
-}
-
 
 
 export const registerUser = async (newUser:newUser) => {
