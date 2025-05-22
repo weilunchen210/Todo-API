@@ -17,16 +17,19 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TodoService {
     private final TodoRepository todoRepository;
+    private final UserService userService;
 
     public Todo getTodoById(Long id){
         return todoRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Todo not found with id: " + id));
     }
 
     public Todo createTodo(saveTodo input){
+        User user = userService.getUserById(input.getUserId());
+
         Todo todo = new Todo();
         todo.setDescription(input.getDescription());
         todo.setTitle(input.getTitle());
-        todo.setUser(input.getUser());
+        todo.setUser(user);
         todo.setCreatedDate(LocalDateTime.now());
         todo.setStatus(status.IN_PROGRESS);
         return todoRepository.save(todo);

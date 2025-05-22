@@ -7,6 +7,8 @@ import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/todo")
 public class TodoController {
@@ -22,7 +24,13 @@ public class TodoController {
         return ResponseEntity.ok(todo);
     }
 
-    @PostMapping("/")
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<Todo>> getTodoList(@PathVariable Long userId){
+        List<Todo> todo = this.todoService.getTodoList(userId);
+        return ResponseEntity.ok(todo);
+    }
+
+    @PostMapping("")
     public ResponseEntity<Todo> createTodo(@RequestBody saveTodo input){
         Todo  todo = this.todoService.createTodo(input);
         return ResponseEntity.ok(todo);
@@ -40,7 +48,7 @@ public class TodoController {
         return ResponseEntity.ok("Update Success");
     }
 
-    @PutMapping("/")
+    @PutMapping("")
     public ResponseEntity<String> completeTodo(@RequestBody Long id){
         this.todoService.completeTask(id);
         return ResponseEntity.ok("Completed Task");

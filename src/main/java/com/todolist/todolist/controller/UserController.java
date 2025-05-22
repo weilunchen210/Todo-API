@@ -1,5 +1,6 @@
 package com.todolist.todolist.controller;
 
+import com.todolist.todolist.Dto.authResponse;
 import com.todolist.todolist.Dto.loginUser;
 import com.todolist.todolist.Dto.registerUser;
 import com.todolist.todolist.Dto.saveTodo;
@@ -26,9 +27,9 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<User> createTodo(@RequestBody loginUser input){
-        User user = this.userService.login(input);
-        return ResponseEntity.ok(user);
+    public ResponseEntity<authResponse> createTodo(@RequestBody loginUser input){
+        authResponse AuthResponse = this.userService.login(input);
+        return ResponseEntity.ok(AuthResponse);
     }
 
 }
