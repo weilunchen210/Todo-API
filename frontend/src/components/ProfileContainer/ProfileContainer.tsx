@@ -33,6 +33,9 @@ function ProfileContainer() {
       setprofilePictureURL(storedProfilePictureURL)
       setImageError(false)
     }
+    if (!storedProfilePictureURL){
+      setImageError(true)
+    }
   }, [])
 
   return (

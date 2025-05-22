@@ -49,7 +49,7 @@ export const loginUser = async (userLoginDetails: userLoginDetails) => {
             Cookies.set('token', response.data.token);
         }
         localStorage.setItem('username',response.data.username)
-        localStorage.setItem('ProfilePictureURL',response.data.ProfilePictureURL)
+        localStorage.setItem('profilePictureURL',response.data.profilePictureURL)
         console.log(response.data);
         return response.data
     }catch (error) {
