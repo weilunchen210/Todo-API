@@ -10,7 +10,7 @@ interface todo{
 
 export const getTodoList = async (): Promise<todo[]> => {
   try {
-    const response = await apiClient.get<todo[]>('http://localhost:8080/todo/user/1');
+    const response = await apiClient.get<todo[]>('/todo/user/1');
     console.log(response.data);
     return response.data;
   } catch (error) {

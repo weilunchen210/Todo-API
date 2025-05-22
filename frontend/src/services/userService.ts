@@ -8,7 +8,7 @@ interface newUser{
 
 export const registerUser = async (newUser:newUser) => {
   try {
-    const response = await apiClient.post('http://localhost:8080/user/register', newUser, {
+    const response = await apiClient.post('/user/register', newUser, {
         headers:{
             'Content-Type' : 'application/json'
         }

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import "./RegisterForm.css"
 import { registerUser } from '../../services/userService'
+import { useNavigate } from 'react-router'
 
 
 function  RegisterForm() {
@@ -8,15 +9,21 @@ function  RegisterForm() {
     const [username,setUsername] = useState("")
     const [password,setPassword] = useState("")
     const [email, setEmail] = useState("")
+    const navigate = useNavigate();
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const newUser = {
             username: username,
             password: password,
             email: email
         }
-        registerUser(newUser)
+        try {
+            await registerUser(newUser);
+            navigate('/login'); // Use navigate function here
+        } catch (error) {
+            console.error('Registration failed:', error);
+        }
     }
 
     return (
