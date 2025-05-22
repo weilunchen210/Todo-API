@@ -22,22 +22,23 @@ public class JwtUtil {
         this.EXPIRATION_TIME = expiration;
     }
 
-    public String generateToken(String email){
+    public String generateToken(Long userId){
         return Jwts.builder()
-                .setSubject(email)
+                .setSubject(String.valueOf(userId))
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .signWith(KEY)
                 .compact();
     }
 
-    public String extractEmail(String token){
-        return Jwts.parserBuilder()
+    public Long extractUserId(String token){
+        String userId = Jwts.parserBuilder()
                 .setSigningKey(KEY)
                 .build()
                 .parseClaimsJws(token)
                 .getBody()
                 .getSubject();
+        return Long.parseLong(userId);
     }
 
     public Date extractExpiry(String token){
