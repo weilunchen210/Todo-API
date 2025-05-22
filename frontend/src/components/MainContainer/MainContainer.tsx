@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import './MainContainer.css'
 import TodoList from '../TodoList/TodoList'
 import { getTodoList } from '../../services/todoService';
+import { registerUser } from '../../services/userService';
 
 
 interface todo{
@@ -55,7 +56,7 @@ function MainContainer() {
           <h1>
             To do List
           </h1>
-          <button>
+          <button onClick={handleTest}>
             Add Task
           </button>
         </div>
