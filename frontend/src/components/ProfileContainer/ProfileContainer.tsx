@@ -1,7 +1,9 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import "./ProfileContainer.css"
 
 function ProfileContainer() {
+
+  const [username,setUsername] = useState("")
     
 
   interface ProfileProps {
@@ -14,13 +16,20 @@ function ProfileContainer() {
     username: "David"
   }
 
+  useEffect(() => {
+    const storedUsername = localStorage.getItem('username')
+    if (storedUsername) {
+      setUsername(storedUsername)
+    }
+  }, [])
+
   return (
     <div className= "profile-wrapper">
         <img src={profile.profilePicture} className="profile-pictures">
 
         </img>
         <div className ="username">
-            {profile.username}
+            {username}
         </div>
         <button type="button" className="logout">
             Log Out

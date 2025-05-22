@@ -1,4 +1,5 @@
 import apiClient from "./apiClient"
+import Cookies from 'js-cookie';
 
 interface todo{
   id:number;
@@ -10,7 +11,15 @@ interface todo{
 
 export const getTodoList = async (): Promise<todo[]> => {
   try {
-    const response = await apiClient.get<todo[]>('/todo/user/1');
+    const jwt = Cookies.get('token')
+    if (!jwt) {
+      throw new Error('No authentication token found');
+    }
+    const response = await apiClient.get<todo[]>('/todo/user', {
+        headers:{
+            Authorization: `Bearer ${jwt}`
+        }
+    });
     console.log(response.data);
     return response.data;
   } catch (error) {
