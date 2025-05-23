@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import './MainContainer.css'
 import TodoList from '../TodoList/TodoList'
-import { addTask, getTodoList } from '../../services/todoService';
+import { addTask, deleteTask, getTodoList } from '../../services/todoService';
 import Modal from '../AddTaskModal/Modal';
 import type { todo } from '../../types/todo';
 
@@ -32,8 +32,14 @@ function MainContainer() {
     fetchTodoList();
   }, [])
 
-  const handleDelete = () => {
-    alert("Deleted")
+  const handleDelete = async (id:number) => {
+    try {
+      await deleteTask(id);
+      settodoList(todoList.filter(todo => todo.id !== id));
+    } catch (error) {
+      console.error("Error deleting task:", error);
+      alert("Failed to delete task. Please try again.");
+    }
   }
 
   const handleAddTask = async (e: React.FormEvent) => {

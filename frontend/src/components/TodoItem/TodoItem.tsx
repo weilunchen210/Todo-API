@@ -2,11 +2,12 @@ import { useState } from 'react'
 import "./TodoItem.css"
 
 interface itemProps{
+  id:number;
   text:string;
-  onDelete?: () => void;
+  onDelete?: (id:number) => void;
 }
 
-function TodoItem({text,onDelete}:itemProps) {
+function TodoItem({id,text,onDelete}:itemProps) {
   const [checked, setChecked] = useState(false)
 
   const handleChange = () =>{
@@ -17,6 +18,12 @@ function TodoItem({text,onDelete}:itemProps) {
 
   const handleClickEdit = () => {
     setEdit(!edit);
+  }
+
+  const handleDelete = () => {
+    if(onDelete){
+      onDelete(id)
+    }
   }
 
   return (
@@ -32,7 +39,7 @@ function TodoItem({text,onDelete}:itemProps) {
       </div>
       <div className="buttons">
         <img src="https://icons.veryicon.com/png/o/miscellaneous/linear-small-icon/edit-246.png" onClick={handleClickEdit}></img>
-        <img src="https://cdn-icons-png.flaticon.com/512/6861/6861362.png" onClick={onDelete}></img>
+        <img src="https://cdn-icons-png.flaticon.com/512/6861/6861362.png" onClick={handleDelete}></img>
       </div>
     </div>
   )

@@ -11,7 +11,7 @@ function  LoginForm() {
     const [password,setPassword] = useState("")
 
     const dummyCredentials = {
-        email:"welper@gmail.com",
+        email:"test@example.com",
         password:"12345"
     }
 

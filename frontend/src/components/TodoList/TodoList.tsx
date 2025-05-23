@@ -4,13 +4,13 @@ import TodoItem from '../TodoItem/TodoItem'
 
 interface todoListProp{
   todoList: todo[];
-  onDelete: () => void;
+  onDelete: (id:number) => void;
 }
 
 function TodoList({todoList, onDelete}: todoListProp) {
 
   const itemList = todoList.map((todo:todo) => 
-    <TodoItem text={todo.task} onDelete = {onDelete}>
+    <TodoItem text={todo.task} id={todo.id} onDelete = {onDelete}>
     </TodoItem>
 )
 
