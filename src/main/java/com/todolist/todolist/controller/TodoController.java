@@ -1,6 +1,7 @@
 package com.todolist.todolist.controller;
 
 import com.todolist.todolist.Dto.saveTodo;
+import com.todolist.todolist.Dto.taskRequest;
 import com.todolist.todolist.entity.Todo;
 import com.todolist.todolist.service.TodoService;
 import com.todolist.todolist.util.JwtUtil;
@@ -36,10 +37,10 @@ public class TodoController {
     }
 
     @PostMapping("")
-    public ResponseEntity<Todo> createTodo(@RequestHeader("Authorization") String authHeader, @RequestBody String task){
+    public ResponseEntity<Todo> createTodo(@RequestHeader("Authorization") String authHeader, @RequestBody taskRequest taskRequest){
         String authHeaderToken = authHeader.substring(7);
         Long userId = jwtUtil.extractUserId(authHeaderToken);
-        saveTodo saveTodo = new saveTodo(task,userId);
+        saveTodo saveTodo = new saveTodo(taskRequest.getTask(),userId);
         Todo  todo = this.todoService.createTodo(saveTodo);
         return ResponseEntity.ok(todo);
     }
@@ -51,8 +52,8 @@ public class TodoController {
     }
 
     @PutMapping("/{Id}")
-    public ResponseEntity<String> editTodo(@RequestBody String task, @PathVariable Long Id){
-        this.todoService.editTodo(task, Id);
+    public ResponseEntity<String> editTodo(@RequestBody taskRequest taskRequest, @PathVariable Long Id){
+        this.todoService.editTodo(taskRequest.getTask(), Id);
         return ResponseEntity.ok("Update Success");
     }
 }

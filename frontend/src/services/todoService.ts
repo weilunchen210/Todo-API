@@ -28,7 +28,8 @@ export const addTask = async (task:string): Promise<todo> => {
     if (!jwt) {
       throw new Error('No authentication token found');
     }
-    const response = await apiClient.post('/todo', task,{
+    console.log(task)
+    const response = await apiClient.post('/todo', {task:task},{
         headers:{
             Authorization: `Bearer ${jwt}`
         }
@@ -67,7 +68,7 @@ export const editTask = async (id:number,editedTask:string): Promise<todo> => {
     if (!jwt) {
       throw new Error('No authentication token found');
     }
-    const response = await apiClient.put(`/todo/${id}`, editedTask,{
+    const response = await apiClient.put(`/todo/${id}`, {task:editedTask},{
         headers:{
             Authorization: `Bearer ${jwt}`
         }

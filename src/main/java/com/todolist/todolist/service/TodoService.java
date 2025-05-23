@@ -1,5 +1,6 @@
 package com.todolist.todolist.service;
 
+import com.todolist.todolist.Dto.taskRequest;
 import com.todolist.todolist.Dto.saveTodo;
 import com.todolist.todolist.entity.Todo;
 import com.todolist.todolist.entity.User;
@@ -7,7 +8,6 @@ import com.todolist.todolist.entity.status;
 import com.todolist.todolist.repository.TodoRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
