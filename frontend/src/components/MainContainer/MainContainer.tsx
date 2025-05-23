@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import './MainContainer.css'
 import TodoList from '../TodoList/TodoList'
 import { addTask, deleteTask, getTodoList } from '../../services/todoService';
-import Modal from '../AddTaskModal/Modal';
+import Modal from '../Modal/Modal';
 import type { todo } from '../../types/todo';
 
 function MainContainer() {

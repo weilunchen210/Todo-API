@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Cookies from 'js-cookie'
 
 const apiURL = import.meta.env.VITE_API_URL
 

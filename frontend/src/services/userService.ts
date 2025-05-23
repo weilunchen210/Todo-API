@@ -12,6 +12,13 @@ interface userLoginDetails{
     password:string
 }
 
+interface editUserDetails{
+  username:string;
+  email:string;
+  password:string;
+  profilePictureURL:string;
+}
+
 
 
 export const registerUser = async (newUser:newUser) => {
@@ -31,15 +38,40 @@ export const registerUser = async (newUser:newUser) => {
 
 export const loginUser = async (userLoginDetails: userLoginDetails) => {
     try{
-        const response = await apiClient.post('/user/login', userLoginDetails)
+      const response = await apiClient.post('/user/login', userLoginDetails)
+      
+      if (response.data.token) {
+          Cookies.set('token', response.data.token);
+      }
+
+      localStorage.setItem('username',response.data.username)
+      localStorage.setItem('profilePictureURL',response.data.profilePictureURL)
+      localStorage.setItem('email',response.data.email)
+      console.log(response.data);
+      return response.data
+    }catch (error) {
+    console.error('Error logging in: ', error);
+    throw error;
+  }
+}
+
+export const editUser = async (editUserDetails: editUserDetails) => {
+    try{
+      const jwt = Cookies.get("token")
+        const response = await apiClient.put('/user/edit', editUserDetails, {
+          headers:{
+              Authorization: `Bearer ${jwt}`
+          }
+      })
         
-        if (response.data.token) {
-            Cookies.set('token', response.data.token);
-        }
-        localStorage.setItem('username',response.data.username)
-        localStorage.setItem('profilePictureURL',response.data.profilePictureURL)
-        console.log(response.data);
-        return response.data
+      if (response.data.token) {
+          Cookies.set('token', response.data.token);
+      }
+      localStorage.setItem('username',response.data.username)
+      localStorage.setItem('profilePictureURL',response.data.profilePictureURL)
+      localStorage.setItem('email',response.data.email)
+      console.log(response.data);
+      return response.data
     }catch (error) {
     console.error('Error logging in: ', error);
     throw error;

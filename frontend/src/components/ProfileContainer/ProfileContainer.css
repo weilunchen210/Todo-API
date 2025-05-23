@@ -31,3 +31,54 @@
 .logout:hover{
     background-color:#FF5733;
 }
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group input{
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    margin-bottom:1rem;
+}
+
+.modal-content h2 {
+    margin-bottom: 1.5rem;
+}
+
+.modal-content form button[type="submit"] {
+    width: 100%;
+    padding: 0.5rem;
+    background-color: #B0DB9C;
+    border: none;
+    border-radius: 4px;
+    color: black;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.modal-content form button[type="submit"]:hover {
+    background-color: #9A85B9;
+}
+
+.editProfile {
+    border:none;
+    padding:0.6rem 0.8rem 0.6rem 0.8rem;
+    background-color:#A7C7E7;
+    border-radius:1rem;
+    cursor:pointer;
+}
+
+.editProfile:hover{
+    background-color:#8FAAC4;
+}
+
+.modal-header{
+    display:flex;
+    flex-direction: column;
+    margin-bottom:1rem;
+    align-items:center;
+}
