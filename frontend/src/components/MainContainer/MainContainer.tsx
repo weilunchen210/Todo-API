@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import './MainContainer.css'
 import TodoList from '../TodoList/TodoList'
-import { addTask, deleteTask, getTodoList } from '../../services/todoService';
+import { addTask, deleteTask, editTask, getTodoList } from '../../services/todoService';
 import Modal from '../Modal/Modal';
 import type { todo } from '../../types/todo';
 
@@ -56,6 +56,21 @@ function MainContainer() {
     }
   }
 
+  const handleEditTask =  async (id:number, editedTask: string) => {
+    try{
+      await editTask(id,editedTask)
+
+      settodoList(todoList.map(todo => {
+        if (todo.id === id) {
+          return { ...todo, task: editedTask };
+        }
+        return todo;
+      }));
+    }catch(error){
+      console.error('Error editing task: ', error)
+    }
+  }
+
 
   return (
     <div className="container-wrapper">
@@ -68,7 +83,7 @@ function MainContainer() {
             Add Task
           </button>
         </div>
-        <TodoList todoList={todoList} onDelete={handleDelete}/>
+        <TodoList todoList={todoList} onDelete={handleDelete} onEdit={handleEditTask}/>
       </div>
 
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>

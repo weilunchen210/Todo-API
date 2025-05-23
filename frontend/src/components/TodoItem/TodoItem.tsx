@@ -4,17 +4,19 @@ import "./TodoItem.css"
 interface itemProps{
   id:number;
   text:string;
-  onDelete?: (id:number) => void;
+  onDelete: (id:number) => void;
+  onEdit: (id:number,newText:string) => void
 }
 
-function TodoItem({id,text,onDelete}:itemProps) {
+function TodoItem({id,text,onDelete, onEdit}:itemProps) {
   const [checked, setChecked] = useState(false)
+  const [edit,setEdit] = useState(false)
+  const [editedText, setEditedText] = useState(text)
 
   const handleChange = () =>{
     setChecked(!checked);
   }
 
-  const [edit,setEdit] = useState(false)
 
   const handleClickEdit = () => {
     setEdit(!edit);
@@ -26,13 +28,29 @@ function TodoItem({id,text,onDelete}:itemProps) {
     }
   }
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+
+    if (editedText.trim() === '') {
+      setEditedText(text); 
+      setEdit(false);
+      return;
+    }
+    onEdit(id,editedText)
+    setEdit(false);
+
+  }
+
   return (
     <div className= "todo-container">
       <div className= "content">
         <input type="checkbox" checked={checked} onChange={handleChange}></input>
         {edit ?
-        <input value={text} type="text">
-        </input> :
+        <form onSubmit={handleSubmit}>
+          <input value={editedText} type="text" onChange={(e) => setEditedText(e.target.value)}>
+          </input> 
+        </form>
+        :
         <p className ={checked ? "done" : ""}>
           {text}
         </p>}

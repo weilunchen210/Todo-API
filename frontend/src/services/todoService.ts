@@ -55,7 +55,27 @@ export const deleteTask = async (id:number): Promise<todo> => {
     console.log(response.data);
     return response.data;
   } catch (error) {
-    console.error('Error fetching todos:', error);
+    console.error('Error Deleting task:', error);
+    throw error;
+  }
+};
+
+
+export const editTask = async (id:number,editedTask:string): Promise<todo> => {
+  try {
+    const jwt = Cookies.get('token')
+    if (!jwt) {
+      throw new Error('No authentication token found');
+    }
+    const response = await apiClient.put(`/todo/${id}`, editedTask,{
+        headers:{
+            Authorization: `Bearer ${jwt}`
+        }
+    });
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error('Error Editing task:', error);
     throw error;
   }
 };
