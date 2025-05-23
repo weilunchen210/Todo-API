@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react'
 import "./ProfileContainer.css"
+import Cookies from 'js-cookie'
+import { useNavigate } from 'react-router'
 
 function ProfileContainer() {
 
   const [username,setUsername] = useState("")
   const [profilePictureURL, setprofilePictureURL] = useState("")
   const [imageError, setImageError] = useState(false)
+  const navigate = useNavigate();
 
   // interface ProfileProps {
   //   profilePicture: string;
@@ -21,6 +24,13 @@ function ProfileContainer() {
 
   const handleImageError = () =>{
     setImageError(true)
+  }
+
+  const handleLogOut = () => {
+    Cookies.remove("token")
+    localStorage.removeItem('username')
+    localStorage.removeItem('profilePictureURL')
+    navigate('/login')
   }
 
   useEffect(() => {
@@ -46,7 +56,7 @@ function ProfileContainer() {
         <div className ="username">
             {username}
         </div>
-        <button type="button" className="logout">
+        <button type="button" className="logout" onClick={handleLogOut}>
             Log Out
         </button>
     </div>
