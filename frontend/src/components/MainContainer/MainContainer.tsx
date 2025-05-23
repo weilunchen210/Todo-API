@@ -1,25 +1,15 @@
 import { useEffect, useState } from 'react'
 import './MainContainer.css'
 import TodoList from '../TodoList/TodoList'
-import { getTodoList } from '../../services/todoService';
+import { addTask, getTodoList } from '../../services/todoService';
 import Modal from '../AddTaskModal/Modal';
-
-interface todo{
-  id:number;
-  title:string;
-  description:string;
-  createdData:Date;
-  status:string;
-}
+import type { todo } from '../../types/todo';
 
 function MainContainer() {
 
   const [todoList,settodoList] = useState<todo[]>([])
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [newTask, setNewTask] = useState({
-    title: '',
-    description: ''
-  })
+  const [newTask, setNewTask] = useState("")
   // const dummyList:dummyTodo[] = [
   //   { id: 1, description: "Complete React project setup" },
   //   { id: 2, description: "Implement user authentication" },
@@ -29,7 +19,6 @@ function MainContainer() {
   // ]
 
   useEffect(() => {
-    //Dummy for now, will be used to fetch API later
     async function fetchTodoList(){
       try{
         const data = await getTodoList();
@@ -47,13 +36,19 @@ function MainContainer() {
     alert("Deleted")
   }
 
-  const handleAddTask = (e: React.FormEvent) => {
+  const handleAddTask = async (e: React.FormEvent) => {
     e.preventDefault()
-    setIsModalOpen(false)
-    setNewTask({ title: '', description: '' })
-  }
 
-  
+    try{
+      const createdTask = await addTask(newTask);
+      settodoList([...todoList, createdTask]);
+      setIsModalOpen(false)
+      setNewTask("")
+    }catch(error){
+      console.error("Error adding task:", error);
+      alert("Failed to add task. Please try again.");
+    }
+  }
 
 
   return (
@@ -77,8 +72,8 @@ function MainContainer() {
             <input
               type="text"
               placeholder="Task title"
-              value={newTask.title}
-              onChange={(e) => setNewTask({...newTask, title: e.target.value})}
+              value={newTask}
+              onChange={(e) => setNewTask(e.target.value)}
               required
             />
           </div>

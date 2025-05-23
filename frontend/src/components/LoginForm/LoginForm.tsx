@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import "./LoginForm.css"
 import { Link, useNavigate } from 'react-router'
 import { loginUser } from '../../services/userService';
@@ -29,8 +29,7 @@ function  LoginForm() {
         }
     }
 
-    const handleDummyLogin = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
+    const handleDummyLogin = async () => {
         try {
             await loginUser(dummyCredentials);
             navigate('/main'); // Use navigate function here
