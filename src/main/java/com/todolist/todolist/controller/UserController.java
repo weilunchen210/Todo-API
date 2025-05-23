@@ -40,4 +40,10 @@ public class UserController {
         User user = this.userService.editUser(input,userId);
         return ResponseEntity.ok(user);
     }
+
+    @PostMapping("/dummyLogin")
+    public ResponseEntity<authResponse> createTodo(){
+        authResponse AuthResponse = this.userService.dummyLogin();
+        return ResponseEntity.ok(AuthResponse);
+    }
 }

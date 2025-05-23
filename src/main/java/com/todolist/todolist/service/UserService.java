@@ -64,4 +64,23 @@ public class UserService {
         user.setProfilePictureURL(input.getProfilePictureURL());
         return userRepository.save(user);
     }
+
+    public authResponse dummyLogin(){
+
+        User user = userRepository.findByEmail("test@example.com").orElse(null);
+
+        if(user == null){
+            user = new User();
+            user.setEmail("test@example.com");
+            user.setUsername("testUser");
+            user.setProfilePictureURL("https://example.com/default-avatar.png");
+        }
+
+        user.setPassword(passwordEncoder.encode("12345"));
+        userRepository.save(user);
+
+        String token = jwtUtil.generateToken(user.getId());
+
+        return new authResponse(token, user.getId(),user.getUsername(),user.getEmail(),user.getProfilePictureURL() );
+    }
 }

@@ -77,3 +77,21 @@ export const editUser = async (editUserDetails: editUserDetails) => {
     throw error;
   }
 }
+
+export const dummyLogin = async () => {
+    try{
+      const response = await apiClient.post('/user/dummyLogin')
+        
+      if (response.data.token) {
+          Cookies.set('token', response.data.token);
+      }
+      localStorage.setItem('username',response.data.username)
+      localStorage.setItem('profilePictureURL',response.data.profilePictureURL)
+      localStorage.setItem('email',response.data.email)
+      console.log(response.data);
+      return response.data
+    }catch (error) {
+    console.error('Error logging in: ', error);
+    throw error;
+  }
+}

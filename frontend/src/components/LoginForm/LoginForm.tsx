@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import "./LoginForm.css"
 import { Link, useNavigate } from 'react-router'
-import { loginUser } from '../../services/userService';
+import { dummyLogin, loginUser } from '../../services/userService';
 
 
 function  LoginForm() {
@@ -10,10 +10,10 @@ function  LoginForm() {
     const [email,setEmail] = useState("")
     const [password,setPassword] = useState("")
 
-    const dummyCredentials = {
-        email:"test@example.com",
-        password:"12345"
-    }
+    // const dummyCredentials = {
+    //     email:"test@example.com",
+    //     password:"12345"
+    // }
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -31,7 +31,7 @@ function  LoginForm() {
 
     const handleDummyLogin = async () => {
         try {
-            await loginUser(dummyCredentials);
+            await dummyLogin();
             navigate('/main'); // Use navigate function here
         } catch (error) {
             console.error('Login failed:', error);
