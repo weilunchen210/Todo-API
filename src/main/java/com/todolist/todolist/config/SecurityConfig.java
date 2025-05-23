@@ -39,7 +39,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/user/register", "/user/login").permitAll()
-                        .requestMatchers("/todo", "/todo/**", "/todo/user/**").authenticated()
+                        .requestMatchers("/todo", "/todo/**", "/todo/user/**","/user/edit").authenticated()
                         .requestMatchers("/error/**").permitAll()
                         .anyRequest().authenticated()
                 )

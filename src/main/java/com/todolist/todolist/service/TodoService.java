@@ -27,8 +27,7 @@ public class TodoService {
         User user = userService.getUserById(input.getUserId());
 
         Todo todo = new Todo();
-        todo.setDescription(input.getDescription());
-        todo.setTitle(input.getTitle());
+        todo.setTask(input.getTask());
         todo.setUser(user);
         todo.setCreatedDate(LocalDateTime.now());
         todo.setStatus(status.IN_PROGRESS);
@@ -40,16 +39,9 @@ public class TodoService {
         todoRepository.delete(todo);
     }
 
-    public void editTodo(saveTodo input, Long id){
+    public void editTodo(String task, Long id){
         Todo todo = getTodoById(id);
-        todo.setDescription(input.getDescription());
-        todo.setTitle(input.getTitle());
-        todoRepository.save(todo);
-    }
-
-    public void completeTask(Long id){
-        Todo todo = getTodoById(id);
-        todo.setStatus(status.COMPLETED);
+        todo.setTask(task);
         todoRepository.save(todo);
     }
 

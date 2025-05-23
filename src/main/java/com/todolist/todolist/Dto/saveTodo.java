@@ -11,7 +11,6 @@ import java.time.LocalDate;
 @Setter
 @AllArgsConstructor
 public class saveTodo {
-    private String title;
-    private String description;
+    private String task;
     private Long userId;
 }

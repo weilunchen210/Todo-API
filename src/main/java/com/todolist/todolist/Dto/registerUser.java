@@ -9,7 +9,9 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class registerUser {
+    private Long userId;
     private String username;
     private String email;
     private String password;
+    private String profilePictureURL;
 }

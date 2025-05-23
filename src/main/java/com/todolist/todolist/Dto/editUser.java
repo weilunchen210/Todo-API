@@ -7,10 +7,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class authResponse {
-    private String token;
-    private Long userId;
+public class editUser {
     private String username;
     private String email;
+    private String password;
     private String profilePictureURL;
 }

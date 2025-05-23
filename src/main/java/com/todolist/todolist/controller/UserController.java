@@ -1,13 +1,11 @@
 package com.todolist.todolist.controller;
 
-import com.todolist.todolist.Dto.authResponse;
-import com.todolist.todolist.Dto.loginUser;
-import com.todolist.todolist.Dto.registerUser;
-import com.todolist.todolist.Dto.saveTodo;
+import com.todolist.todolist.Dto.*;
 import com.todolist.todolist.entity.Todo;
 import com.todolist.todolist.entity.User;
 import com.todolist.todolist.service.TodoService;
 import com.todolist.todolist.service.UserService;
+import com.todolist.todolist.util.JwtUtil;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,9 +13,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/user")
 public class UserController {
     private final UserService userService;
+    private final JwtUtil jwtUtil;
 
-    UserController(UserService userService){
+    UserController(UserService userService, JwtUtil jwtUtil){
+
         this.userService = userService;
+        this.jwtUtil = jwtUtil;
     }
 
     @PostMapping("/register")
@@ -32,4 +33,11 @@ public class UserController {
         return ResponseEntity.ok(AuthResponse);
     }
 
+    @PutMapping("/edit")
+    public ResponseEntity<User> editTodo(@RequestHeader("Authorization") String authHeader, @RequestBody editUser input){
+        String authHeaderToken = authHeader.substring(7);
+        Long userId = jwtUtil.extractUserId(authHeaderToken);
+        User user = this.userService.editUser(input,userId);
+        return ResponseEntity.ok(user);
+    }
 }

@@ -27,16 +27,20 @@ public class TodoController {
         return ResponseEntity.ok(todo);
     }
 
-    @GetMapping("/user/")
+    @GetMapping("/user")
     public ResponseEntity<List<Todo>> getTodoList(@RequestHeader("Authorization") String authHeader){
-        Long userId = jwtUtil.extractUserId(authHeader);
+        String authHeaderToken = authHeader.substring(7);
+        Long userId = jwtUtil.extractUserId(authHeaderToken);
         List<Todo> todo = this.todoService.getTodoList(userId);
         return ResponseEntity.ok(todo);
     }
 
     @PostMapping("")
-    public ResponseEntity<Todo> createTodo(@RequestBody saveTodo input){
-        Todo  todo = this.todoService.createTodo(input);
+    public ResponseEntity<Todo> createTodo(@RequestHeader("Authorization") String authHeader, @RequestBody String task){
+        String authHeaderToken = authHeader.substring(7);
+        Long userId = jwtUtil.extractUserId(authHeaderToken);
+        saveTodo saveTodo = new saveTodo(task,userId);
+        Todo  todo = this.todoService.createTodo(saveTodo);
         return ResponseEntity.ok(todo);
     }
 
@@ -47,15 +51,8 @@ public class TodoController {
     }
 
     @PutMapping("/{Id}")
-    public ResponseEntity<String> editTodo(@RequestBody saveTodo input, @PathVariable Long Id){
-        this.todoService.editTodo(input, Id);
+    public ResponseEntity<String> editTodo(@RequestBody String task, @PathVariable Long Id){
+        this.todoService.editTodo(task, Id);
         return ResponseEntity.ok("Update Success");
     }
-
-    @PutMapping("")
-    public ResponseEntity<String> completeTodo(@RequestBody Long id){
-        this.todoService.completeTask(id);
-        return ResponseEntity.ok("Completed Task");
-    }
-
 }

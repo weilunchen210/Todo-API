@@ -1,9 +1,6 @@
 package com.todolist.todolist.service;
 
-import com.todolist.todolist.Dto.authResponse;
-import com.todolist.todolist.Dto.loginUser;
-import com.todolist.todolist.Dto.registerUser;
-import com.todolist.todolist.Dto.saveTodo;
+import com.todolist.todolist.Dto.*;
 import com.todolist.todolist.entity.Todo;
 import com.todolist.todolist.entity.User;
 import com.todolist.todolist.entity.status;
@@ -14,6 +11,7 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +30,7 @@ public class UserService {
         user.setEmail(input.getEmail());
         user.setPassword(passwordEncoder.encode(input.getPassword()));
         user.setUsername(input.getUsername());
+        user.setProfilePictureURL(input.getProfilePictureURL());
         return userRepository.save(user);
     }
 
@@ -44,7 +43,7 @@ public class UserService {
         }
         String token = jwtUtil.generateToken(user.getId());
 
-        return new authResponse(token, user.getId(),user.getUsername(),user.getEmail() );
+        return new authResponse(token, user.getId(),user.getUsername(),user.getEmail(),user.getProfilePictureURL() );
     }
 
     public User getUserById(Long UserId){
@@ -55,5 +54,14 @@ public class UserService {
     public User getUserByEmail(String email){
         User user = userRepository.findByEmail(email).orElseThrow(() -> new EntityNotFoundException("Invalid Email: " + email));
         return user;
+    }
+
+    public User editUser(editUser input, Long userId){
+        User user = getUserById(userId);
+        user.setEmail(input.getEmail());
+        user.setUsername(input.getUsername());
+        user.setPassword(passwordEncoder.encode(input.getPassword()));
+        user.setProfilePictureURL(input.getProfilePictureURL());
+        return userRepository.save(user);
     }
 }
